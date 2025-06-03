@@ -1,31 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const TrafficLightSimulator = () => {
   const [currentLight, setCurrentLight] = useState('red');
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLight((prevLight) => {
+        if (prevLight === 'red') return 'green';
+        if (prevLight === 'green') return 'yellow';
+        return 'red';
+      });
+    }, 2000); // light chang every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div style={styles.container}>
-      <div
-        style={{
-          ...styles.light,
-          backgroundColor: 'red',
-          opacity: currentLight === 'red' ? 1 : 0.3,
-        }}
-      ></div>
-      <div
-        style={{
-          ...styles.light,
-          backgroundColor: 'yellow',
-          opacity: currentLight === 'yellow' ? 1 : 0.3,
-        }}
-      ></div>
-      <div
-        style={{
-          ...styles.light,
-          backgroundColor: 'green',
-          opacity: currentLight === 'green' ? 1 : 0.3,
-        }}
-      ></div>
+      <h2 style={styles.heading}>Traffic Light Simulator</h2>
+      <div style={styles.trafficLight}>
+        <div
+          style={{
+            ...styles.light,
+            backgroundColor: 'red',
+            opacity: currentLight === 'red' ? 1 : 0.3,
+          }}
+        ></div>
+        <div
+          style={{
+            ...styles.light,
+            backgroundColor: 'yellow',
+            opacity: currentLight === 'yellow' ? 1 : 0.3,
+          }}
+        ></div>
+        <div
+          style={{
+            ...styles.light,
+            backgroundColor: 'green',
+            opacity: currentLight === 'green' ? 1 : 0.3,
+          }}
+        ></div>
+      </div>
     </div>
   );
 };
@@ -55,6 +70,7 @@ const styles = {
     width: 60,
     height: 60,
     borderRadius: "50%",
+    transition: "opacity 0.3s",
   },
 };
 
