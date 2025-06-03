@@ -5,12 +5,12 @@ const TrafficLightSimulator = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentLight((prevLight) => {
-        if (prevLight === 'red') return 'green';
-        if (prevLight === 'green') return 'yellow';
+      setCurrentLight((prev) => {
+        if (prev === 'red') return 'green';
+        if (prev === 'green') return 'yellow';
         return 'red';
       });
-    }, 2000); // light chang every 2 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -23,6 +23,10 @@ const TrafficLightSimulator = () => {
           style={{
             ...styles.light,
             backgroundColor: 'red',
+            boxShadow:
+              currentLight === 'red'
+                ? '0 0 20px 10px rgba(255, 0, 0, 0.7)'
+                : 'none',
             opacity: currentLight === 'red' ? 1 : 0.3,
           }}
         ></div>
@@ -30,6 +34,10 @@ const TrafficLightSimulator = () => {
           style={{
             ...styles.light,
             backgroundColor: 'yellow',
+            boxShadow:
+              currentLight === 'yellow'
+                ? '0 0 20px 10px rgba(255, 255, 0, 0.7)'
+                : 'none',
             opacity: currentLight === 'yellow' ? 1 : 0.3,
           }}
         ></div>
@@ -37,6 +45,10 @@ const TrafficLightSimulator = () => {
           style={{
             ...styles.light,
             backgroundColor: 'green',
+            boxShadow:
+              currentLight === 'green'
+                ? '0 0 20px 10px rgba(0, 255, 0, 0.7)'
+                : 'none',
             opacity: currentLight === 'green' ? 1 : 0.3,
           }}
         ></div>
@@ -60,17 +72,18 @@ const styles = {
   },
   trafficLight: {
     backgroundColor: "#333",
-    padding: 20,
-    borderRadius: 20,
+    padding: 30,
+    borderRadius: 30,
     display: "flex",
     flexDirection: "column",
     gap: 20,
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
   },
   light: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     borderRadius: "50%",
-    transition: "opacity 0.3s",
+    transition: "opacity 0.5s, box-shadow 0.5s",
   },
 };
 
