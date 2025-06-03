@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState } from 'react';
 
 const TrafficLightSimulator = () => {
+  const [currentLight, setCurrentLight] = useState('red');
+
   return (
     <div style={styles.container}>
-      <h2 style={styles.heading}>Traffic Light Simulator</h2>
-      <div style={styles.trafficLight}>
-        <div style={{ ...styles.light, backgroundColor: "gray" }}></div>
-        <div style={{ ...styles.light, backgroundColor: "gray" }}></div>
-        <div style={{ ...styles.light, backgroundColor: "gray" }}></div>
-      </div>
+      <div
+        style={{
+          ...styles.light,
+          backgroundColor: 'red',
+          opacity: currentLight === 'red' ? 1 : 0.3,
+        }}
+      ></div>
+      <div
+        style={{
+          ...styles.light,
+          backgroundColor: 'yellow',
+          opacity: currentLight === 'yellow' ? 1 : 0.3,
+        }}
+      ></div>
+      <div
+        style={{
+          ...styles.light,
+          backgroundColor: 'green',
+          opacity: currentLight === 'green' ? 1 : 0.3,
+        }}
+      ></div>
     </div>
   );
 };
@@ -42,5 +59,3 @@ const styles = {
 };
 
 export default TrafficLightSimulator;
-
-
